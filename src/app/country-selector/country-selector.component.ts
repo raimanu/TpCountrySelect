@@ -28,9 +28,7 @@ export class CountrySelectorComponent implements AfterViewInit, OnDestroy{
 
   ngAfterViewInit() {
     this.subscription = fromEvent(this.inputValue.nativeElement, "keyup").pipe(
-      debounceTime(500),
-      map((x) => this.inputValue.nativeElement.value)
-    ).subscribe((x) => {
+      map((x) => this.inputValue.nativeElement.value)).subscribe((x) => {
       if (x.trim().length == 0){
         this.paysProposer = [];
       } else {
@@ -39,21 +37,19 @@ export class CountrySelectorComponent implements AfterViewInit, OnDestroy{
     });
   }
 
-  selectCountry(ev: any){
+  paysConcernee(ev: any){
     this.inputValue.nativeElement.value = ev.target.innerText;
   }
 
-  onBlur(){
-    let selecteur = this;
-    setTimeout(function() {
-      selecteur.paysProposer = []
-    }, 50);
-  }
-
-  onFocus(){
+  focus(){
     if (this.inputValue.nativeElement.value.trim().length > 0){
       this.paysProposer = this.pays.filter((x) => x.libelle.toLowerCase().startsWith(this.inputValue.nativeElement.value.toLowerCase()));
     }
+  }
+
+  blur(){
+    let selecteur = this;
+    selecteur.paysProposer = [];
   }
 
   ngOnDestroy(): void {

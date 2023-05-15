@@ -1,9 +1,9 @@
 <div>
     <h1>Pays</h1>
-    <input id="pays" type="text" (blur)="onBlur()" (focus)="onFocus()" #input>
-    <ol>
-        <li *ngFor="let pays of paysProposer" (click)="selectCountry($event)">
+    <input id="pays" type="text" (blur)="blur()" (focus)="focus()" #input>
+    <ul>
+        <li *ngFor="let pays of paysProposer" (click)="paysConcernee($event)">
             {{pays.libelle}}
         </li>
-    </ol>
+    </ul>
 </div>
